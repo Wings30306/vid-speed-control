@@ -2,11 +2,12 @@ const speed = document.querySelector(".speed")
 const bar = speed.querySelector(".speed-bar")
 const video = document.querySelector(".flex")
 
+const min = 0.4;
+    const max = 4
+
  function handleMove(e) {
     const y = e.pageY - this.offsetTop
     const percent = y / this.offsetHeight
-    const min = 0.4;
-    const max = 4
     const height = Math.round(percent * 100) + "%"
     const playbackRate = percent * (max - min) + min
     bar.style.height = height
@@ -14,5 +15,23 @@ const video = document.querySelector(".flex")
     video.playbackRate = playbackRate
 }
 
-speed.addEventListener("mousemove", handleMove)
+function keyControl(e) {
+    let playbackRate = video.playbackRate
+    const changeBy = 0.1
+    if (e.key === "ArrowUp") {
+        if (playbackRate < max - changeBy) {
+            playbackRate += changeBy
+        }
+    } else if (e.key === "ArrowDown") {
+        if (playbackRate > min + changeBy) {
+            playbackRate -= changeBy
+        }
+    }
+    video.playbackRate = playbackRate
+    bar.textContent = playbackRate.toFixed(2) + "x"
+    bar.style.height = (playbackRate * 100 / max) + "%" 
+}
 
+speed.addEventListener("mousemove", handleMove)
+speed.addEventListener("touchmove", handleMove)
+window.addEventListener("keydown", keyControl)

@@ -33,5 +33,5 @@ function keyControl(e) {
 }
 
 speed.addEventListener("mousemove", handleMove)
-speed.addEventListener("touchmove", handleMove)
+speed.addEventListener("touchchange", handleMove)
 window.addEventListener("keydown", keyControl)

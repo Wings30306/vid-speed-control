@@ -19,11 +19,11 @@ function keyControl(e) {
   let playbackRate = video.playbackRate;
   const changeBy = 0.1;
   if (e.key === "ArrowUp") {
-    if (playbackRate < max - changeBy) {
+    if (playbackRate <= max - changeBy) {
       playbackRate += changeBy;
     }
   } else if (e.key === "ArrowDown") {
-    if (playbackRate > min + changeBy) {
+    if (playbackRate >= min + changeBy) {
       playbackRate -= changeBy;
     }
   }
